@@ -6,12 +6,12 @@ let presupuesto = 0;
 
 function actualizarPresupuesto(valor) {
     // TODO
-    if (typeof valor == "number" && valor > 0) {
+    if (typeof valor === "number" && valor >= 0) {
         presupuesto = valor;
         return presupuesto;
     }
     else{
-        alert("Error: valor por debajo de 0");
+        console.log("Error: valor por debajo de 0");
         return -1;
     }
 
@@ -24,7 +24,6 @@ function mostrarPresupuesto() {
 
 function CrearGasto() {
     // TODO
-
 }
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
