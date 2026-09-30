@@ -19,6 +19,7 @@ function actualizarPresupuesto(valor) {
 
 function mostrarPresupuesto() {
     // TODO
+    alert("tu presupuesto actual es de " + presupuesto + " €");
 }
 
 function CrearGasto() {
