@@ -2,6 +2,8 @@
 
 // Variable global
 let presupuesto = 0;
+let gastos = new Array();
+let idGasto = 0;
 
 function actualizarPresupuesto(valor) {
 
@@ -20,9 +22,12 @@ function mostrarPresupuesto() {
     return "Tu presupuesto actual es de " + presupuesto + " €";
 }
 
-function CrearGasto(descripcion, valor) {
+function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
 
     this.descripcion = descripcion;
+    this.valor = valor;
+    this.fecha = fecha;
+    this.etiquetas = etiquetas;
 
     if (typeof valor === "number" && valor >= 0) {
         this.valor = valor;
@@ -30,6 +35,16 @@ function CrearGasto(descripcion, valor) {
     else {
         this.valor = 0;
     }
+
+    if (typeof fecha === "string" && !isNaN(Date.parse(fecha))) {
+        this.fecha = Date.parse(fecha);
+    }
+    else{
+        this.fecha = Date.now();
+    }
+
+    etiquetas = new Array();
+
 
     this.mostrarGasto = function() {
         return "Gasto correspondiente a " + this.descripcion + " con valor " + this.valor + " €";
@@ -46,6 +61,27 @@ function CrearGasto(descripcion, valor) {
     };
 }
 
+function listarGastos(){
+    return gastos;
+}
+
+function anyadirGasto(){
+
+}
+
+function borrarGasto(){
+
+}
+
+function calcularTotalGastos(){
+
+}
+
+function calcularBalance(){
+
+}
+
+
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
@@ -53,5 +89,10 @@ function CrearGasto(descripcion, valor) {
 export {
     mostrarPresupuesto,
     actualizarPresupuesto,
-    CrearGasto
+    CrearGasto,
+    listarGastos,
+    anyadirGasto,
+    borrarGasto,
+    calcularTotalGastos,
+    calcularBalance
 }
