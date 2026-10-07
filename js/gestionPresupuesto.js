@@ -63,6 +63,44 @@ function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
             }
         }
     }
+    this.mostrarGastoCompleto = function() {
+        let texto = "Gasto correspondiente a " + this.descripcion + " con valor " + this.valor + " €.\n";
+
+        texto += "Fecha: " + new Date(this.fecha).toLocaleString() + "\n";
+
+        texto += "Etiquetas:";
+
+        for (let i = 0; i < this.etiquetas.length; i++) {
+            texto += "\n - " + this.etiquetas[i];
+        }
+
+        return texto;
+    }
+    this.actualizarFecha = function(nuevaFecha) {
+        if (typeof nuevaFecha === "string" && !isNaN(Date.parse(nuevaFecha))) {
+            this.fecha = Date.parse(nuevaFecha);
+        }
+    }
+    this.anyadirEtiquetas = function(...nuevasEtiquetas) {
+        for (let i = 0; i < nuevasEtiquetas.length; i++) {
+
+            if (!this.etiquetas.includes(nuevasEtiquetas[i])) {
+                this.etiquetas.push(nuevasEtiquetas[i]);
+            }
+
+        }
+    }
+    this.borrarEtiquetas = function(...etiquetasBorrar) {
+        for (let i = 0; i < etiquetasBorrar.length; i++) {
+
+            let posicion = this.etiquetas.indexOf(etiquetasBorrar[i]);
+
+            if (posicion !== -1) {
+                this.etiquetas.splice(posicion, 1);
+            }
+
+        }
+    }
 }
 
 function listarGastos(){
