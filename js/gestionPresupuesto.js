@@ -127,6 +127,16 @@ function calcularBalance() {
     return presupuesto - calcularTotalGastos();
 }
 
+function filtrarGastos(etiqueta) {
+    return gastos.filter(function(gasto) {
+        return gasto.etiquetas.includes(etiqueta);
+    })
+}
+
+function agruparGastos() {
+    
+}
+
 
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
@@ -140,5 +150,7 @@ export {
     anyadirGasto,
     borrarGasto,
     calcularTotalGastos,
-    calcularBalance
+    calcularBalance,
+    filtrarGastos,
+    agruparGastos,
 }
