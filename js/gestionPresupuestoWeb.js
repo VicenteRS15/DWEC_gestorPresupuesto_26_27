@@ -1,5 +1,7 @@
 //Funciones para interactuar con el DOM
 
+import { agruparGastos } from "./gestionPresupuesto"
+
 export function mostrarDatoEnId(idElemento, valor) {
     let elemento = document.getElementById(idElemento)
     elemento.textContent = valor
@@ -36,6 +38,30 @@ export function mostrarGastoWeb(idElemento, gasto) {
     document.getElementById(idElemento).append(divGasto)
 }
 
-export function mostrarGastosAgrupadosWeb(params) {
-    
+export function mostrarGastosAgrupadosWeb(idElemento, agroup, periodo) {
+    let elemento = document.getElementById(idElemento);
+
+    let divAgrupacion = document.createElement("div")
+    divAgrupacion.classList.add("agrupacion")
+
+    let h1Gastos = document.createElement("h1")
+    h1Gastos.textContent = "Gastos agrupados por " + periodo
+
+    for (let [clave, valor] of Object.entries(agroup)) {
+        let divAgrupacionDato = document.createElement("div")
+        divAgrupacionDato.classList.add("agrupacion-dato")
+
+        let span = document.createElement("span")
+        let span2 = document.createElement("span")
+        span.classList.add("agrupacion-dato-clave")
+        span2.classList.add("agrupacion-dato-valor")
+
+        span.textContent = clave
+        span2.textContent = valor
+
+        divAgrupacion.append(divAgrupacionDato, h1Gastos)
+        divAgrupacionDato.append(span, span2)
+    }
+
+    document.getElementById(idElemento).append(divAgrupacion)
 }
