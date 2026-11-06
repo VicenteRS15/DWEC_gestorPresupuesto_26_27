@@ -1,6 +1,5 @@
-//Funciones para interactuar con el DOM
 
-import { agruparGastos } from "./gestionPresupuesto"
+ // Funciones para interactuar con el DOM
 
 export function mostrarDatoEnId(idElemento, valor) {
     let elemento = document.getElementById(idElemento)
@@ -15,12 +14,15 @@ export function mostrarGastoWeb(idElemento, gasto) {
 
     let divDescripcion = document.createElement("div")
     divDescripcion.classList.add("gasto-descripcion")
+    divDescripcion.textContent = gasto.descripcion
 
     let divFecha = document.createElement("div")
     divFecha.classList.add("gasto-fecha")
+    divFecha.textContent = new Date(gasto.fecha).toLocaleDateString()
 
     let divValor = document.createElement("div")
     divValor.classList.add("gasto-valor")
+    divValor.textContent = gasto.valor
 
     let divEtiquetas = document.createElement("div")
     divEtiquetas.classList.add("gasto-etiquetas")
@@ -35,33 +37,37 @@ export function mostrarGastoWeb(idElemento, gasto) {
 
     divGasto.append(divDescripcion, divFecha, divValor, divEtiquetas)
 
-    document.getElementById(idElemento).append(divGasto)
+    contenedor.append(divGasto)
 }
 
-export function mostrarGastosAgrupadosWeb(idElemento, agroup, periodo) {
-    let elemento = document.getElementById(idElemento);
+export function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
+    let elemento = document.getElementById(idElemento)
 
     let divAgrupacion = document.createElement("div")
     divAgrupacion.classList.add("agrupacion")
 
     let h1Gastos = document.createElement("h1")
-    h1Gastos.textContent = "Gastos agrupados por " + periodo
+    h1Gastos.textContent = `Gastos agrupados por ${periodo}`
+    
 
-    for (let [clave, valor] of Object.entries(agroup)) {
+    divAgrupacion.append(h1Gastos)
+
+    for (let [clave, valor] of Object.entries(agrup)) {
         let divAgrupacionDato = document.createElement("div")
         divAgrupacionDato.classList.add("agrupacion-dato")
 
         let span = document.createElement("span")
         let span2 = document.createElement("span")
+
         span.classList.add("agrupacion-dato-clave")
         span2.classList.add("agrupacion-dato-valor")
 
         span.textContent = clave
-        span2.textContent = valor
+        span2.textContent = valor.toFixed(2)
 
-        divAgrupacion.append(divAgrupacionDato, h1Gastos)
         divAgrupacionDato.append(span, span2)
+        divAgrupacion.append(divAgrupacionDato)
     }
 
-    document.getElementById(idElemento).append(divAgrupacion)
+    elemento.append(divAgrupacion)
 }
