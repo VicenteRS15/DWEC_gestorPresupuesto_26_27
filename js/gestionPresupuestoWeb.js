@@ -32,6 +32,8 @@ export function mostrarGastoWeb(idElemento, gasto) {
     }
 
     divGasto.append(divDescripcion, divFecha, divValor, divEtiquetas)
+
+    document.getElementById(idElemento).append(divGasto)
 }
 
 export function mostrarGastosAgrupadosWeb(params) {
