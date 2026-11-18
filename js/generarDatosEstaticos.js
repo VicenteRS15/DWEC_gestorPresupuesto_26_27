@@ -83,3 +83,5 @@ gpw.mostrarGastosAgrupadosWeb("agrupacion-mes", gp.agruparGastos("mes"), "mes");
 // Mostrar gastos agrupados por año
 gpw.mostrarGastosAgrupadosWeb("agrupacion-anyo", gp.agruparGastos("anyo"), "año");
 
+gpw.repintar();
+
