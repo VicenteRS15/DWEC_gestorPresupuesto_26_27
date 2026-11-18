@@ -144,7 +144,12 @@ export function actualizarPresupuestoWeb(){
     gp.actualizarPresupuesto(presupuesto)
 
     repintar();
-
 }
+
+let boton = document.getElementById("actualizarpresupuesto")
+
+boton.addEventListener("click", actualizarPresupuestoWeb)
+
+
 
 
