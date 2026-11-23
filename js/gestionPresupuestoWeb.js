@@ -28,15 +28,42 @@ export function mostrarGastoWeb(idElemento, gasto) {
     let divEtiquetas = document.createElement("div")
     divEtiquetas.classList.add("gasto-etiquetas")
 
+    let btnEditar = document.createElement("button")
+    btnEditar.textContent = "Editar"
+    btnEditar.classList.add("gasto-editar")
+    btnEditar.type = "button"
+
+    let handlerEditar = new EditarHandle()
+    handlerEditar.gasto = gasto
+
+    btnEditar.addEventListener("click", handlerEditar)
+
+    let btnBorrar = document.createElement("button")
+    btnBorrar.textContent = "Borrar"
+    btnBorrar.classList.add("gasto-borrar")
+    btnBorrar.type = "button"
+
+    let handlerBorrar = new BorrarHandle()
+    handlerBorrar.gasto = gasto
+
+    btnBorrar.addEventListener("click", handlerBorrar)
+
     for (let index = 0; index < gasto.etiquetas.length; index++) {
         let spanEtiqueta = document.createElement("span")
         spanEtiqueta.classList.add("gasto-etiquetas-etiqueta")
         spanEtiqueta.textContent = gasto.etiquetas[index]
 
+        let handler = new BorrarEtiquetasHandle()
+        handler.gasto = gasto;
+        handler.etiqueta = gasto.etiquetas[index]
+
+        spanEtiqueta.addEventListener("click", handler)
+
+
         divEtiquetas.append(spanEtiqueta)
     }
 
-    divGasto.append(divDescripcion, divFecha, divValor, divEtiquetas)
+    divGasto.append(divDescripcion, divFecha, divValor, divEtiquetas, btnEditar, btnBorrar)
 
     contenedor.append(divGasto)
 }
