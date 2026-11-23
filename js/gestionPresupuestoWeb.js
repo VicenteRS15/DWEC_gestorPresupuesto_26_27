@@ -152,13 +152,13 @@ boton.addEventListener("click", actualizarPresupuestoWeb)
 
 export function nuevoGastoWeb(){
     let descripcion = (prompt("Descripción del gasto: "))
-    let valor = Number.parseInt(prompt("Valor del gasto: "))
+    let valor = Number(prompt("Valor del gasto: "))
     let fecha = prompt("Fecha: ")
     let etiquetas = prompt("Etiquetas separadas por comas: ")
 
     etiquetas = etiquetas.split(",")
 
-    gp.anyadirGasto(new gp.CrearGasto(descripcion,valor,fecha,etiquetas))
+    gp.anyadirGasto(new gp.CrearGasto(descripcion,valor,fecha,...etiquetas))
 
     repintar()
 }
@@ -166,4 +166,43 @@ export function nuevoGastoWeb(){
 let btnAnyadirGasto = document.getElementById("anyadirgasto")
 btnAnyadirGasto.addEventListener("click", nuevoGastoWeb);
 
+export function EditarHandle(){
+    this.handleEvent = function(){
+        let handler = this.gasto;
+        let newDesc = prompt("Nueva descripción: ", handler.descripcion)
+        let newValor = Number(prompt("Nuevo valor: ", handler.valor))
+        let newFecha = prompt("Nueva fecha (AAAA-MM-DD): ")
+        let newEtiquetas = prompt("Nuevas etiquetas: ", handler.etiquetas)
 
+        newEtiquetas = newEtiquetas.split(",")
+
+        handler.actualizarDescripcion(newDesc)
+        handler.actualizarValor(newValor)
+        handler.actualizarFecha(newFecha)
+        handler.anyadirEtiquetas(...newEtiquetas)
+
+        repintar();
+    }
+}
+
+export function BorrarHandle(){
+    this.handleEvent = function(){
+        let handler = this.gasto;
+
+        gp.borrarGasto(handler.id)
+
+        repintar()
+    }
+}
+
+export function BorrarEtiquetasHandle(){
+    this.handleEvent = function(){
+        let handler = this.gasto;
+
+        let etiqueta = this.etiqueta
+
+        handler.borrarEtiquetas(etiqueta)
+
+        repintar()
+    }
+}
