@@ -150,6 +150,20 @@ let boton = document.getElementById("actualizarpresupuesto")
 
 boton.addEventListener("click", actualizarPresupuestoWeb)
 
+export function nuevoGastoWeb(){
+    let descripcion = (prompt("Descripción del gasto: "))
+    let valor = Number.parseInt(prompt("Valor del gasto: "))
+    let fecha = prompt("Fecha: ")
+    let etiquetas = prompt("Etiquetas separadas por comas: ")
 
+    etiquetas = etiquetas.split(",")
+
+    gp.anyadirGasto(new gp.CrearGasto(descripcion,valor,fecha,etiquetas))
+
+    repintar()
+}
+
+let btnAnyadirGasto = document.getElementById("anyadirgasto")
+btnAnyadirGasto.addEventListener("click", nuevoGastoWeb);
 
 
